@@ -1,6 +1,5 @@
 package com.ecommerce.esscube.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.ecommerce.esscube.model.Category;
 import com.ecommerce.esscube.service.CategoryService;
