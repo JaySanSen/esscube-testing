@@ -25,14 +25,14 @@ public class CategoryController {
   }
 
   @GetMapping("api/public/categories")
-  public List<Category> getAllCategories() {
-    return categoryService.getAllCategories();
+  public ResponseEntity<List<Category>> getAllCategories() {
+    return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
   }
 
   @PostMapping("api/public/categories")
-  public String createCategory(@RequestBody Category category) {
+  public ResponseEntity<String> createCategory(@RequestBody Category category) {
     categoryService.createCategory(category);
-    return "Category added successfully";
+    return ResponseEntity.ok("Category created");
   }
 
   @DeleteMapping("api/admin/categories/{categoryId}")
