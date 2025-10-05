@@ -2,9 +2,9 @@ package com.ecommerce.esscube.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -38,4 +38,17 @@ public class CategoryServiceImpl implements CategoryService {
     return "Category: " + categoryId + " deleted";
   }
 
+  @Override
+  public Category updateCategory(Category category, Long categoryId) {
+    Optional<Category> optionalCategory = categories.stream().filter(x -> x.getCategoryId().equals(categoryId)).findFirst();
+    if(optionalCategory.isPresent())
+    {
+      Category existingCategory = optionalCategory.get();
+      existingCategory.setCategoryName(category.getCategoryName());
+      return existingCategory;
+    }
+    else{
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Category was not found to update");
+    }
+  }
 }
